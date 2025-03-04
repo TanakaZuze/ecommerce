@@ -1,7 +1,9 @@
 package com.ecom.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
 @Entity
 @Data
 public class Product {
@@ -14,7 +16,8 @@ public class Product {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name="category_id",nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference // ✅ Breaks circular reference
     private Category category;
 
     public Long getId() {

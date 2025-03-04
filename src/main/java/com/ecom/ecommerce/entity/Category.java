@@ -1,6 +1,6 @@
 package com.ecom.ecommerce.entity;
 
-import com.ecom.ecommerce.entity.Product;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,11 +15,11 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category",
-    cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
+    @JsonManagedReference // ✅ Links with @JsonBackReference
     private Set<Product> products;
-
 
     public Long getId() {
         return id;
